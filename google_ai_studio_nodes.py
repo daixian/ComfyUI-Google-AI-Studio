@@ -228,11 +228,12 @@ class GoogleAIStudioTextGenNode:
     """
     
     TEXT_MODELS = [
+        "gemini-3-pro-preview",
         "gemini-2.0-flash-001",
         "gemini-2.0-flash-thinking-001", 
-        "gemini-1.5-pro",
-        "gemini-1.5-flash",
-        "gemini-1.5-flash-8b"
+        "gemini-1.5-pro-002",
+        "gemini-1.5-flash-002",
+        "gemini-1.5-flash-8b-001"
     ]
 
     @classmethod
@@ -337,9 +338,9 @@ class GoogleAIStudioImageGenNode:
     """
     
     IMAGE_MODELS = [
-        "gemini-2.0-flash-preview-image-generation",  # Gemini 2.0 Flash image generation
-        "gemini-2.5-flash-image-preview",             # Gemini 2.5 Flash image generation
-        "imagen-3.0-generate-002",                    # Imagen models (paid tier)
+        "gemini-3-pro-image-preview",                # Gemini 3 Pro Image Preview
+        "gemini-2.5-flash-image",                    # Gemini 2.5 Flash Image
+        "imagen-4.0-generate-001",                   # Imagen 4 (paid tier)
         "imagen-3.0-fast-generate-001"
     ]
     
@@ -360,7 +361,7 @@ class GoogleAIStudioImageGenNode:
                     "tooltip": "Your Google AI Studio API key"
                 }),
                 "model": (cls.IMAGE_MODELS, {
-                    "default": "gemini-2.0-flash-preview-image-generation"
+                    "default": "gemini-3-pro-image-preview"
                 }),
             },
             "optional": {

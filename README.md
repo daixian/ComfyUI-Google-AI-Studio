@@ -46,7 +46,7 @@ Generates text using Google's Gemini models for creative writing, essays, code, 
 **Inputs:**
 - `prompt`: The text prompt to generate from (multiline supported)
 - `api_key`: Your Google AI Studio API key
-- `model`: Choose from Gemini models (gemini-2.0-flash-001, gemini-1.5-pro, etc.)
+- `model`: Choose from Gemini models (gemini-3-pro-preview, gemini-2.0-flash-001, gemini-1.5-pro-002, etc.)
 - `system_instruction` (optional): Guide the model's behavior and tone
 - `temperature` (optional): Controls creativity (0.0-2.0, default 0.7)
 - `max_output_tokens` (optional): Maximum tokens to generate (1-8192, default 1024)
@@ -59,10 +59,10 @@ Generates text using Google's Gemini models for creative writing, essays, code, 
 Creates images using Google's Gemini and Imagen models from text descriptions.
 
 **Available Models:**
-- `gemini-2.0-flash-preview-image-generation` - **Free tier** (default, basic controls)
-- `gemini-2.5-flash-image-preview` - **Free tier** (newest Gemini model, basic controls)
-- `imagen-3.0-generate-002` - **Paid tier** (high quality, advanced controls)
-- `imagen-3.0-fast-generate-001` - **Paid tier** (faster generation, advanced controls)
+- `gemini-3-pro-image-preview` - **Free tier** (default, newest model)
+- `gemini-2.5-flash-image` - **Free tier** (efficient, basic controls)
+- `imagen-4.0-generate-001` - **Paid tier** (advanced controls, highest quality)
+- `imagen-3.0-fast-generate-001` - **Paid tier** (fast generation)
 
 **Inputs:**
 - `prompt`: Description of the image to generate or edit
@@ -166,8 +166,8 @@ The TTS models automatically detect input language and support 24 languages incl
 1. Add a "Google AI Studio Image Generator" node
 2. Enter your prompt: `"A serene Japanese garden with cherry blossoms and a small pond"`
 3. Enter your API key
-4. Select model: `gemini-2.0-flash-preview-image-generation` (free tier, default)
-5. For advanced controls (paid tier), switch to `imagen-3.0-generate-002` and adjust aspect ratio, safety settings
+4. Select model: `gemini-3-pro-image-preview` (free tier, default)
+5. For advanced controls (paid tier), switch to `imagen-4.0-generate-001` and adjust aspect ratio, safety settings
 6. Connect output to image preview or save node
 
 ### Image Editing Example
@@ -271,7 +271,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
   - Supports single images or batch processing
   - Works with all ComfyUI image nodes and workflows
 
-- **Gemini 2.5 Flash Image Model**: Added `gemini-2.5-flash-image-preview`
+- **Gemini 3 Models**: Added support for `gemini-3-pro-preview` and `gemini-3-pro-image-preview`.
+- **Gemini 2.5 Flash Image Model**: Updated to `gemini-2.5-flash-image`.
+- **Imagen 4**: Added `imagen-4.0-generate-001`.
   - Latest Google image generation model
   - Free tier access with advanced capabilities
   - Enhanced image quality and prompt understanding
