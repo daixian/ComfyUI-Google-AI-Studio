@@ -1,6 +1,6 @@
 # ComfyUI Google AI Studio Nodes
 
-This custom node package provides integration with Google AI Studio's latest APIs for ComfyUI, including Text-to-Speech (TTS), Text Generation, and Image Generation using the `google-genai` [Google Gen AI SDK](https://github.com/googleapis/python-genai) (Google AI Studio).
+This custom node package provides integration with Google AI Studio's latest APIs for ComfyUI, including Text-to-Speech (TTS), Text Generation, and Image Generation (Nano Banana) using the `google-genai` [Google Gen AI SDK](https://github.com/googleapis/python-genai) (Google AI Studio).
 
 ![ComfyUI Google AI Studio Nodes](images/image.png)
 
@@ -46,10 +46,11 @@ Generates text using Google's Gemini models for creative writing, essays, code, 
 **Inputs:**
 - `prompt`: The text prompt to generate from (multiline supported)
 - `api_key`: Your Google AI Studio API key
-- `model`: Choose from Gemini models (gemini-3-pro-preview, gemini-2.0-flash-001, gemini-1.5-pro-002, etc.)
+- `model`: Choose from Gemini models (gemini-2.5-flash, gemini-2.5-pro, gemini-3.1-pro-preview, etc.)
 - `system_instruction` (optional): Guide the model's behavior and tone
 - `temperature` (optional): Controls creativity (0.0-2.0, default 0.7)
 - `max_output_tokens` (optional): Maximum tokens to generate (1-8192, default 1024)
+- `thinking_level` (optional): Reasoning depth for Gemini 2.5/3 (off, low, medium, high)
 
 **Output:**
 - `text`: Generated text content
@@ -59,10 +60,13 @@ Generates text using Google's Gemini models for creative writing, essays, code, 
 Creates images using Google's Gemini and Imagen models from text descriptions.
 
 **Available Models:**
-- `gemini-3-pro-image-preview` - **Free tier** (default, newest model)
-- `gemini-2.5-flash-image` - **Free tier** (efficient, basic controls)
-- `imagen-4.0-generate-001` - **Paid tier** (advanced controls, highest quality)
-- `imagen-3.0-fast-generate-001` - **Paid tier** (fast generation)
+- `gemini-3.1-flash-image-preview` - **Free tier** (default, Nano Banana 2)
+- `gemini-3-pro-image-preview` - **Free tier** (Nano Banana Pro)
+- `gemini-2.5-flash-image` - **Free tier** (Nano Banana, efficient)
+- `imagen-4.0-fast-generate-001` - **Paid tier** (Imagen 4 Fast)
+- `imagen-4.0-generate-001` - **Paid tier** (Imagen 4)
+- `imagen-4.0-ultra-generate-001` - **Paid tier** (Imagen 4 Ultra)
+- `imagen-3.0-fast-generate-001` - **Paid tier** (Imagen 3 Fast)
 
 **Inputs:**
 - `prompt`: Description of the image to generate or edit
@@ -158,7 +162,7 @@ The TTS models automatically detect input language and support 24 languages incl
 1. Add a "Google AI Studio Text Generator" node
 2. Enter your prompt: `"Write a creative short story about a robot learning to paint"`
 3. Enter your API key
-4. Select model: `gemini-2.0-flash-001`
+4. Select model: `gemini-2.5-flash`
 5. Adjust temperature for creativity (0.7 for balanced, 1.5 for very creative)
 6. Connect output to text display or save node
 
@@ -166,7 +170,7 @@ The TTS models automatically detect input language and support 24 languages incl
 1. Add a "Google AI Studio Image Generator" node
 2. Enter your prompt: `"A serene Japanese garden with cherry blossoms and a small pond"`
 3. Enter your API key
-4. Select model: `gemini-3-pro-image-preview` (free tier, default)
+4. Select model: `gemini-3.1-flash-image-preview` (free tier, default)
 5. For advanced controls (paid tier), switch to `imagen-4.0-generate-001` and adjust aspect ratio, safety settings
 6. Connect output to image preview or save node
 
@@ -175,7 +179,7 @@ The TTS models automatically detect input language and support 24 languages incl
 2. Connect an input image to the `input_image` parameter
 3. Enter your editing prompt: `"Add a rainbow in the sky and make it look more vibrant"`
 4. Enter your API key
-5. Select a Gemini model (2.0 or 2.5 Flash - image editing only works with Gemini models)
+5. Select a Gemini model (2.5 Flash or 3.1 Flash Image - image editing only works with Gemini models)
 6. Connect output to image preview or save node
 
 ### Batch Image Processing Example
@@ -259,6 +263,17 @@ For Google AI Studio API issues:
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Changelog
+
+### v1.2.0 - Model Updates & Thinking Control
+
+#### 🆕 New Features
+- **Thinking Level**: Optional `thinking_level` parameter for Text Generator (off, low, medium, high) - controls reasoning depth for Gemini 2.5/3 models
+
+#### 🔄 Model Updates (per [Gemini API changelog](https://ai.google.dev/gemini-api/docs/changelog) & [deprecations](https://ai.google.dev/gemini-api/docs/deprecations))
+- **Text Generator**: Added gemini-3.1-pro-preview, gemini-3.1-flash-lite-preview, gemini-3-flash-preview, gemini-2.5-pro, gemini-2.5-flash, gemini-2.5-flash-lite. Removed deprecated gemini-3-pro-preview, gemini-2.0-flash-001. Default: gemini-2.5-flash
+- **Image Generator**: Added gemini-3.1-flash-image-preview (Nano Banana 2), imagen-4.0-fast-generate-001, imagen-4.0-ultra-generate-001. Default: gemini-3.1-flash-image-preview
+
+---
 
 ### v1.1.0 - Image Editing & Batch Processing
 

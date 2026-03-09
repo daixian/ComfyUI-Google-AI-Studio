@@ -227,13 +227,19 @@ class GoogleAIStudioTextGenNode:
     Generates text using Google's Gemini models
     """
     
+    # Updated per https://ai.google.dev/gemini-api/docs/changelog and deprecations
+    # Deprecated/removed: gemini-3-pro-preview (Mar 2026), gemini-2.0-flash-* (Feb 2026)
     TEXT_MODELS = [
-        "gemini-3-pro-preview",
-        "gemini-2.0-flash-001",
-        "gemini-2.0-flash-thinking-001", 
+        "gemini-3.1-pro-preview",
+        "gemini-3.1-flash-lite-preview",
+        "gemini-3-flash-preview",
+        "gemini-2.5-pro",
+        "gemini-2.5-flash",
+        "gemini-2.5-flash-lite",
+        "gemini-2.0-flash-thinking-001",
         "gemini-1.5-pro-002",
         "gemini-1.5-flash-002",
-        "gemini-1.5-flash-8b-001"
+        "gemini-1.5-flash-8b-001",
     ]
 
     @classmethod
@@ -249,7 +255,7 @@ class GoogleAIStudioTextGenNode:
                     "tooltip": "Your Google AI Studio API key"
                 }),
                 "model": (cls.TEXT_MODELS, {
-                    "default": "gemini-2.0-flash-001"
+                    "default": "gemini-2.5-flash"
                 }),
             },
             "optional": {
@@ -272,6 +278,10 @@ class GoogleAIStudioTextGenNode:
                     "step": 1,
                     "tooltip": "Maximum number of tokens to generate"
                 }),
+                "thinking_level": (["off", "low", "medium", "high"], {
+                    "default": "off",
+                    "tooltip": "Reasoning depth (Gemini 2.5/3 only). 'high' for complex tasks, 'low' for latency-sensitive."
+                }),
             }
         }
 
@@ -288,7 +298,7 @@ class GoogleAIStudioTextGenNode:
 
     def generate_text(self, prompt: str, api_key: str, model: str, 
                      system_instruction: str = "", temperature: float = 0.7, 
-                     max_output_tokens: int = 1024) -> tuple:
+                     max_output_tokens: int = 1024, thinking_level: str = "off") -> tuple:
         """
         Generate text using Google AI Studio
         """
@@ -306,10 +316,15 @@ class GoogleAIStudioTextGenNode:
             client = genai.Client()
             
             # Prepare generation config
-            generation_config = types.GenerateContentConfig(
+            config_kwargs = dict(
                 temperature=temperature,
                 max_output_tokens=max_output_tokens,
             )
+            if thinking_level != "off":
+                config_kwargs["thinking_config"] = types.ThinkingConfig(
+                    thinking_level=thinking_level.upper()
+                )
+            generation_config = types.GenerateContentConfig(**config_kwargs)
             
             # Add system instruction if provided
             if system_instruction.strip():
@@ -337,11 +352,16 @@ class GoogleAIStudioImageGenNode:
     Generates images using Google's Gemini and Imagen models
     """
     
+    # Updated per https://ai.google.dev/gemini-api/docs/changelog and deprecations
+    # Deprecated: gemini-2.5-flash-image-preview (Feb 2026)
     IMAGE_MODELS = [
-        "gemini-3-pro-image-preview",                # Gemini 3 Pro Image Preview
-        "gemini-2.5-flash-image",                    # Gemini 2.5 Flash Image
+        "gemini-3.1-flash-image-preview",            # Gemini 3.1 Flash Image (Nano Banana 2)
+        "gemini-3-pro-image-preview",                # Gemini 3 Pro Image (Nano Banana Pro)
+        "gemini-2.5-flash-image",                    # Gemini 2.5 Flash Image (Nano Banana)
+        "imagen-4.0-fast-generate-001",              # Imagen 4 Fast
         "imagen-4.0-generate-001",                   # Imagen 4 (paid tier)
-        "imagen-3.0-fast-generate-001"
+        "imagen-4.0-ultra-generate-001",             # Imagen 4 Ultra
+        "imagen-3.0-fast-generate-001",              # Imagen 3 Fast
     ]
     
     ASPECT_RATIOS = [
@@ -361,7 +381,7 @@ class GoogleAIStudioImageGenNode:
                     "tooltip": "Your Google AI Studio API key"
                 }),
                 "model": (cls.IMAGE_MODELS, {
-                    "default": "gemini-3-pro-image-preview"
+                    "default": "gemini-3.1-flash-image-preview"
                 }),
             },
             "optional": {
