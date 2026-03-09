@@ -28,7 +28,8 @@
       "outputs": [],
       "properties": {
         "cnr_id": "comfy-core",
-        "ver": "0.3.43"
+        "ver": "0.3.43",
+        "Node name for S&R": "SaveImage"
       },
       "widgets_values": [
         "ComfyUI"
@@ -46,7 +47,7 @@
         95.0707015991211
       ],
       "flags": {},
-      "order": 4,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
@@ -106,7 +107,14 @@
       "flags": {},
       "order": 0,
       "mode": 0,
-      "inputs": [],
+      "inputs": [
+        {
+          "name": "input_image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
       "outputs": [
         {
           "name": "image",
@@ -117,16 +125,57 @@
         }
       ],
       "properties": {
+        "cnr_id": "ComfyUI-Google-AI-Studio",
+        "ver": "083aa5b59732affd44159e63b47d2da9861c6f68",
         "Node name for S&R": "GoogleAIStudioImageGen"
       },
       "widgets_values": [
         "a comedian at a show infront of a brick wall",
         "",
-        "gemini-3-pro-image-preview",
+        "gemini-3.1-flash-image-preview",
         "",
         "1:1",
         "BLOCK_NONE",
         "ALLOW_ALL"
+      ]
+    },
+    {
+      "id": 9,
+      "type": "GoogleAIStudioTextGen",
+      "pos": [
+        532.6006469726562,
+        -14.198040008544922
+      ],
+      "size": [
+        417.17169189453125,
+        310
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI-Google-AI-Studio",
+        "ver": "083aa5b59732affd44159e63b47d2da9861c6f68",
+        "Node name for S&R": "GoogleAIStudioTextGen"
+      },
+      "widgets_values": [
+        "Tell me a single line joke about women.",
+        "",
+        "gemini-3.1-pro-preview",
+        "you are a raw comedian who makes dirty jokes",
+        0.7,
+        1024,
+        "off"
       ]
     },
     {
@@ -141,7 +190,7 @@
         200
       ],
       "flags": {},
-      "order": 5,
+      "order": 4,
       "mode": 0,
       "inputs": [
         {
@@ -164,6 +213,8 @@
         }
       ],
       "properties": {
+        "cnr_id": "ComfyUI-Google-AI-Studio",
+        "ver": "083aa5b59732affd44159e63b47d2da9861c6f68",
         "Node name for S&R": "GoogleAIStudioTTS"
       },
       "widgets_values": [
@@ -186,7 +237,7 @@
         328
       ],
       "flags": {},
-      "order": 1,
+      "order": 2,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -199,6 +250,8 @@
         }
       ],
       "properties": {
+        "cnr_id": "ComfyUI-Google-AI-Studio",
+        "ver": "083aa5b59732affd44159e63b47d2da9861c6f68",
         "Node name for S&R": "GoogleAIStudioMultiSpeakerTTS"
       },
       "widgets_values": [
@@ -213,42 +266,6 @@
         "Zephyr (Bright)",
         "",
         "Charon (Informative)"
-      ]
-    },
-    {
-      "id": 9,
-      "type": "GoogleAIStudioTextGen",
-      "pos": [
-        532.6006469726562,
-        -14.198040008544922
-      ],
-      "size": [
-        417.17169189453125,
-        310
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "links": [
-            5
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "GoogleAIStudioTextGen"
-      },
-      "widgets_values": [
-        "Tell me a single line joke about women.",
-        "",
-        "gemini-2.0-flash-001",
-        "you are a raw comedian who makes dirty jokes",
-        0.7,
-        1024
       ]
     }
   ],
@@ -290,10 +307,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.7513148009015777,
+      "scale": 0.5644739300537773,
       "offset": [
-        -362.7016189336868,
-        828.0201449504124
+        -286.2976032417261,
+        555.9152444519148
       ]
     },
     "node_versions": {
@@ -303,7 +320,8 @@
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,
     "VHS_KeepIntermediate": true,
-    "frontendVersion": "1.23.4"
+    "frontendVersion": "1.39.19",
+    "workflowRendererVersion": "LG"
   },
   "version": 0.4
 }
