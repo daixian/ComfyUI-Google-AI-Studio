@@ -8,6 +8,7 @@ import os
 import tempfile
 import wave
 import base64
+import re
 import folder_paths
 import numpy as np
 import torch
@@ -20,6 +21,33 @@ try:
 except ImportError:
     GOOGLE_AI_AVAILABLE = False
     print("Google AI SDK not available. Please install with: pip install google-genai")
+
+
+ENV_VAR_PATTERN = re.compile(r"^\$\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$")
+
+
+def resolve_google_api_key(api_key: str) -> str:
+    """
+    Resolve an API key literal or an environment variable placeholder.
+
+    Supported placeholder format:
+    - $(GOOGLE_API_KEY)
+    - $( GOOGLE_API_KEY )
+    """
+    raw_value = api_key.strip()
+    if not raw_value:
+        raise Exception("API key is required. You can enter a real key or use $(GOOGLE_API_KEY). Placeholder names may include optional spaces.")
+
+    match = ENV_VAR_PATTERN.match(raw_value)
+    if not match:
+        return raw_value
+
+    env_var_name = match.group(1)
+    env_var_value = os.getenv(env_var_name, "").strip()
+    if not env_var_value:
+        raise Exception(f"Environment variable '{env_var_name}' is not set or is empty.")
+
+    return env_var_value
 
 
 class GoogleAIStudioTTSNode:
@@ -57,7 +85,7 @@ class GoogleAIStudioTTSNode:
                 }),
                 "api_key": ("STRING", {
                     "default": "",
-                    "tooltip": "Your Google AI Studio API key"
+                    "tooltip": "Your Google AI Studio API key, or an environment placeholder like $(GOOGLE_API_KEY) or $( GOOGLE_API_KEY )"
                 }),
                 "model": (cls.MODELS, {
                     "default": "gemini-2.5-flash-preview-tts"
@@ -86,13 +114,12 @@ class GoogleAIStudioTTSNode:
         """
         if not GOOGLE_AI_AVAILABLE:
             raise Exception("Google AI SDK not installed. Please install with: pip install google-genai")
-        
-        if not api_key.strip():
-            raise Exception("API key is required. Get one from https://aistudio.google.com/")
-        
+
         try:
+            resolved_api_key = resolve_google_api_key(api_key)
+
             # Set up the API key
-            os.environ['GOOGLE_API_KEY'] = api_key.strip()
+            os.environ['GOOGLE_API_KEY'] = resolved_api_key
             
             # Initialize the client
             client = genai.Client()
@@ -252,7 +279,7 @@ class GoogleAIStudioTextGenNode:
                 }),
                 "api_key": ("STRING", {
                     "default": "",
-                    "tooltip": "Your Google AI Studio API key"
+                    "tooltip": "Your Google AI Studio API key, or an environment placeholder like $(GOOGLE_API_KEY) or $( GOOGLE_API_KEY )"
                 }),
                 "model": (cls.TEXT_MODELS, {
                     "default": "gemini-2.5-flash"
@@ -304,13 +331,12 @@ class GoogleAIStudioTextGenNode:
         """
         if not GOOGLE_AI_AVAILABLE:
             raise Exception("Google AI SDK not installed. Please install with: pip install google-genai")
-        
-        if not api_key.strip():
-            raise Exception("API key is required. Get one from https://aistudio.google.com/")
-        
+
         try:
+            resolved_api_key = resolve_google_api_key(api_key)
+
             # Set up the API key
-            os.environ['GOOGLE_API_KEY'] = api_key.strip()
+            os.environ['GOOGLE_API_KEY'] = resolved_api_key
             
             # Initialize the client
             client = genai.Client()
@@ -378,7 +404,7 @@ class GoogleAIStudioImageGenNode:
                 }),
                 "api_key": ("STRING", {
                     "default": "",
-                    "tooltip": "Your Google AI Studio API key"
+                    "tooltip": "Your Google AI Studio API key, or an environment placeholder like $(GOOGLE_API_KEY) or $( GOOGLE_API_KEY )"
                 }),
                 "model": (cls.IMAGE_MODELS, {
                     "default": "gemini-3.1-flash-image-preview"
@@ -464,13 +490,12 @@ class GoogleAIStudioImageGenNode:
         """
         if not GOOGLE_AI_AVAILABLE:
             raise Exception("Google AI SDK not installed. Please install with: pip install google-genai")
-        
-        if not api_key.strip():
-            raise Exception("API key is required. Get one from https://aistudio.google.com/")
-        
+
         try:
+            resolved_api_key = resolve_google_api_key(api_key)
+
             # Set up the API key
-            os.environ['GOOGLE_API_KEY'] = api_key.strip()
+            os.environ['GOOGLE_API_KEY'] = resolved_api_key
             
             # Initialize the client
             client = genai.Client()
@@ -668,7 +693,7 @@ class GoogleAIStudioMultiSpeakerTTSNode:
                 }),
                 "api_key": ("STRING", {
                     "default": "",
-                    "tooltip": "Your Google AI Studio API key"
+                    "tooltip": "Your Google AI Studio API key, or an environment placeholder like $(GOOGLE_API_KEY) or $( GOOGLE_API_KEY )"
                 }),
                 "model": (cls.MODELS, {
                     "default": "gemini-2.5-flash-preview-tts"
@@ -722,13 +747,12 @@ class GoogleAIStudioMultiSpeakerTTSNode:
         """
         if not GOOGLE_AI_AVAILABLE:
             raise Exception("Google AI SDK not installed. Please install with: pip install google-genai")
-        
-        if not api_key.strip():
-            raise Exception("API key is required. Get one from https://aistudio.google.com/")
-        
+
         try:
+            resolved_api_key = resolve_google_api_key(api_key)
+
             # Set up the API key
-            os.environ['GOOGLE_API_KEY'] = api_key.strip()
+            os.environ['GOOGLE_API_KEY'] = resolved_api_key
             
             # Initialize the client
             client = genai.Client()
