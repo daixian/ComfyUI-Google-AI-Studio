@@ -1,0 +1,191 @@
+{
+  "GoogleAIStudioTTS": {
+    "display_name": "Google AI Studio TTS",
+    "description": "Convert text to speech with Google AI Studio Gemini TTS models.",
+    "inputs": {
+      "text": {
+        "name": "Text",
+        "tooltip": "Text content to synthesize into speech."
+      },
+      "api_key": {
+        "name": "API Key",
+        "tooltip": "Your Google AI Studio API key, or an environment placeholder like $(GOOGLE_API_KEY)."
+      },
+      "model": {
+        "name": "Model",
+        "tooltip": "Gemini TTS model to use."
+      },
+      "voice": {
+        "name": "Voice",
+        "tooltip": "Voice preset used for speech synthesis."
+      },
+      "instruction_prefix": {
+        "name": "Instruction Prefix",
+        "tooltip": "Optional style instruction prepended before the text."
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "Audio",
+        "tooltip": "Generated audio waveform."
+      }
+    }
+  },
+  "GoogleAIStudioMultiSpeakerTTS": {
+    "display_name": "Google AI Studio Multi-Speaker TTS",
+    "description": "Convert a multi-speaker transcript to speech with Google AI Studio Gemini TTS models.",
+    "inputs": {
+      "transcript": {
+        "name": "Transcript",
+        "tooltip": "Transcript where each line starts with a speaker name followed by a colon."
+      },
+      "api_key": {
+        "name": "API Key",
+        "tooltip": "Your Google AI Studio API key, or an environment placeholder like $(GOOGLE_API_KEY)."
+      },
+      "model": {
+        "name": "Model",
+        "tooltip": "Gemini multi-speaker TTS model to use."
+      },
+      "speaker1_name": {
+        "name": "Speaker 1 Name",
+        "tooltip": "Display name of the first speaker."
+      },
+      "speaker1_voice": {
+        "name": "Speaker 1 Voice",
+        "tooltip": "Voice preset used for speaker 1."
+      },
+      "speaker2_name": {
+        "name": "Speaker 2 Name",
+        "tooltip": "Display name of the second speaker."
+      },
+      "speaker2_voice": {
+        "name": "Speaker 2 Voice",
+        "tooltip": "Voice preset used for speaker 2."
+      },
+      "speaker3_name": {
+        "name": "Speaker 3 Name",
+        "tooltip": "Optional display name of the third speaker."
+      },
+      "speaker3_voice": {
+        "name": "Speaker 3 Voice",
+        "tooltip": "Voice preset used for speaker 3."
+      },
+      "speaker4_name": {
+        "name": "Speaker 4 Name",
+        "tooltip": "Optional display name of the fourth speaker."
+      },
+      "speaker4_voice": {
+        "name": "Speaker 4 Voice",
+        "tooltip": "Voice preset used for speaker 4."
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "Audio",
+        "tooltip": "Generated multi-speaker audio waveform."
+      }
+    }
+  },
+  "GoogleAIStudioTextGen": {
+    "display_name": "Google AI Studio Text Generator",
+    "description": "Generate text with Google AI Studio Gemini models.",
+    "inputs": {
+      "prompt": {
+        "name": "Prompt",
+        "tooltip": "Prompt sent to the model."
+      },
+      "api_key": {
+        "name": "API Key",
+        "tooltip": "Your Google AI Studio API key, or an environment placeholder like $(GOOGLE_API_KEY)."
+      },
+      "model": {
+        "name": "Model",
+        "tooltip": "Gemini text model to use."
+      },
+      "system_instruction": {
+        "name": "System Instruction",
+        "tooltip": "Optional system instruction that guides the model behavior."
+      },
+      "temperature": {
+        "name": "Temperature",
+        "tooltip": "Controls randomness in generation. Lower is more deterministic."
+      },
+      "max_output_tokens": {
+        "name": "Max Output Tokens",
+        "tooltip": "Maximum number of tokens the model may generate."
+      },
+      "thinking_level": {
+        "name": "Thinking Level",
+        "tooltip": "Reasoning depth for supported Gemini models.",
+        "options": {
+          "off": "Off",
+          "low": "Low",
+          "medium": "Medium",
+          "high": "High"
+        }
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "Text",
+        "tooltip": "Generated text result."
+      }
+    }
+  },
+  "GoogleAIStudioImageGen": {
+    "display_name": "Google AI Studio Image Generator",
+    "description": "Generate or edit images with Gemini image models and Imagen models.",
+    "inputs": {
+      "prompt": {
+        "name": "Prompt",
+        "tooltip": "Main prompt used to generate the image."
+      },
+      "api_key": {
+        "name": "API Key",
+        "tooltip": "Your Google AI Studio API key, or an environment placeholder like $(GOOGLE_API_KEY)."
+      },
+      "model": {
+        "name": "Model",
+        "tooltip": "Image model to use."
+      },
+      "input_image": {
+        "name": "Input Image",
+        "tooltip": "Optional source image for editing. Supported by Gemini image models."
+      },
+      "negative_prompt": {
+        "name": "Negative Prompt",
+        "tooltip": "Content you want to avoid in the generated image."
+      },
+      "aspect_ratio": {
+        "name": "Aspect Ratio",
+        "tooltip": "Aspect ratio for Imagen models."
+      },
+      "safety_filter_level": {
+        "name": "Safety Filter Level",
+        "tooltip": "Safety filtering level for Imagen models.",
+        "options": {
+          "BLOCK_NONE": "Block None",
+          "BLOCK_ONLY_HIGH": "Block Only High",
+          "BLOCK_MEDIUM_AND_ABOVE": "Block Medium And Above",
+          "BLOCK_LOW_AND_ABOVE": "Block Low And Above"
+        }
+      },
+      "person_generation": {
+        "name": "Person Generation",
+        "tooltip": "Human generation policy for Imagen models.",
+        "options": {
+          "DONT_ALLOW": "Don't Allow",
+          "ALLOW_ADULT": "Allow Adult",
+          "ALLOW_ALL": "Allow All"
+        }
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "Image",
+        "tooltip": "Generated image result."
+      }
+    }
+  }
+}

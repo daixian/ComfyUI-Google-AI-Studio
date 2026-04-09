@@ -1,0 +1,191 @@
+{
+  "GoogleAIStudioTTS": {
+    "display_name": "Google AI Studio 文本转语音",
+    "description": "使用 Google AI Studio 的 Gemini TTS 模型把文本转换为语音。",
+    "inputs": {
+      "text": {
+        "name": "文本",
+        "tooltip": "要转换成语音的文本内容。"
+      },
+      "api_key": {
+        "name": "API 密钥",
+        "tooltip": "Google AI Studio API 密钥，或类似 $(GOOGLE_API_KEY) 的环境变量占位符。"
+      },
+      "model": {
+        "name": "模型",
+        "tooltip": "要使用的 Gemini TTS 模型。"
+      },
+      "voice": {
+        "name": "音色",
+        "tooltip": "用于语音合成的预设音色。"
+      },
+      "instruction_prefix": {
+        "name": "指令前缀",
+        "tooltip": "可选的风格指令，会在文本前拼接后一起发送给模型。"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "音频",
+        "tooltip": "生成后的音频波形。"
+      }
+    }
+  },
+  "GoogleAIStudioMultiSpeakerTTS": {
+    "display_name": "Google AI Studio 多说话人文本转语音",
+    "description": "使用 Google AI Studio 的 Gemini TTS 模型把多说话人台词转换为语音。",
+    "inputs": {
+      "transcript": {
+        "name": "台词脚本",
+        "tooltip": "多说话人台词，每行以“说话人名:”开头。"
+      },
+      "api_key": {
+        "name": "API 密钥",
+        "tooltip": "Google AI Studio API 密钥，或类似 $(GOOGLE_API_KEY) 的环境变量占位符。"
+      },
+      "model": {
+        "name": "模型",
+        "tooltip": "要使用的多说话人 Gemini TTS 模型。"
+      },
+      "speaker1_name": {
+        "name": "说话人1名称",
+        "tooltip": "第一个说话人的显示名称。"
+      },
+      "speaker1_voice": {
+        "name": "说话人1音色",
+        "tooltip": "第一个说话人使用的预设音色。"
+      },
+      "speaker2_name": {
+        "name": "说话人2名称",
+        "tooltip": "第二个说话人的显示名称。"
+      },
+      "speaker2_voice": {
+        "name": "说话人2音色",
+        "tooltip": "第二个说话人使用的预设音色。"
+      },
+      "speaker3_name": {
+        "name": "说话人3名称",
+        "tooltip": "第三个说话人的显示名称，可选。"
+      },
+      "speaker3_voice": {
+        "name": "说话人3音色",
+        "tooltip": "第三个说话人使用的预设音色。"
+      },
+      "speaker4_name": {
+        "name": "说话人4名称",
+        "tooltip": "第四个说话人的显示名称，可选。"
+      },
+      "speaker4_voice": {
+        "name": "说话人4音色",
+        "tooltip": "第四个说话人使用的预设音色。"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "音频",
+        "tooltip": "生成后的多说话人音频波形。"
+      }
+    }
+  },
+  "GoogleAIStudioTextGen": {
+    "display_name": "Google AI Studio 文本生成",
+    "description": "使用 Google AI Studio 的 Gemini 模型生成文本。",
+    "inputs": {
+      "prompt": {
+        "name": "提示词",
+        "tooltip": "发送给模型的主提示词。"
+      },
+      "api_key": {
+        "name": "API 密钥",
+        "tooltip": "Google AI Studio API 密钥，或类似 $(GOOGLE_API_KEY) 的环境变量占位符。"
+      },
+      "model": {
+        "name": "模型",
+        "tooltip": "要使用的 Gemini 文本模型。"
+      },
+      "system_instruction": {
+        "name": "系统指令",
+        "tooltip": "可选的系统指令，用来约束模型行为。"
+      },
+      "temperature": {
+        "name": "温度",
+        "tooltip": "控制生成随机性，越低越稳定。"
+      },
+      "max_output_tokens": {
+        "name": "最大输出 Token",
+        "tooltip": "模型最多允许生成的 Token 数量。"
+      },
+      "thinking_level": {
+        "name": "思考等级",
+        "tooltip": "支持的 Gemini 模型可用的推理深度设置。",
+        "options": {
+          "off": "关闭",
+          "low": "低",
+          "medium": "中",
+          "high": "高"
+        }
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "文本",
+        "tooltip": "生成后的文本结果。"
+      }
+    }
+  },
+  "GoogleAIStudioImageGen": {
+    "display_name": "Google AI Studio 图像生成",
+    "description": "使用 Gemini 图像模型或 Imagen 模型生成、编辑图片。",
+    "inputs": {
+      "prompt": {
+        "name": "提示词",
+        "tooltip": "用于生成图片的主提示词。"
+      },
+      "api_key": {
+        "name": "API 密钥",
+        "tooltip": "Google AI Studio API 密钥，或类似 $(GOOGLE_API_KEY) 的环境变量占位符。"
+      },
+      "model": {
+        "name": "模型",
+        "tooltip": "要使用的图像模型。"
+      },
+      "input_image": {
+        "name": "输入图像",
+        "tooltip": "可选的源图，用于图像编辑。Gemini 图像模型支持此输入。"
+      },
+      "negative_prompt": {
+        "name": "负向提示词",
+        "tooltip": "希望在生成图片中避免出现的内容。"
+      },
+      "aspect_ratio": {
+        "name": "宽高比",
+        "tooltip": "Imagen 模型使用的宽高比设置。"
+      },
+      "safety_filter_level": {
+        "name": "安全过滤级别",
+        "tooltip": "Imagen 模型使用的安全过滤级别。",
+        "options": {
+          "BLOCK_NONE": "不过滤",
+          "BLOCK_ONLY_HIGH": "仅过滤高风险",
+          "BLOCK_MEDIUM_AND_ABOVE": "过滤中高风险",
+          "BLOCK_LOW_AND_ABOVE": "过滤低中高风险"
+        }
+      },
+      "person_generation": {
+        "name": "人物生成",
+        "tooltip": "Imagen 模型的人物生成策略。",
+        "options": {
+          "DONT_ALLOW": "不允许",
+          "ALLOW_ADULT": "仅允许成人",
+          "ALLOW_ALL": "全部允许"
+        }
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "图像",
+        "tooltip": "生成后的图像结果。"
+      }
+    }
+  }
+}
